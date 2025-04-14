@@ -1,0 +1,46 @@
+package com.ejemplosemestral.gestor_usuario.controller;
+
+import java.util.List;
+
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.ejemplosemestral.gestor_usuario.model.Usuario;
+import com.ejemplosemestral.gestor_usuario.service.UserService;
+
+@RestController
+public class UserController {
+
+    UserService accionesUsuario = new UserService();
+
+    @GetMapping("/usuarios")
+    public List<Usuario> mostrarUsuarios(){
+        return accionesUsuario.getAllUser();
+        
+    }
+
+    @GetMapping("/usuarios/{id}")
+    public Usuario obtenerUsuario(@PathVariable int id){
+        return accionesUsuario.obtenerUsuario(id);
+
+    }
+
+    @PostMapping("/usuarios")
+    public String crearUsuario(@RequestBody Usuario usuario){
+        return accionesUsuario.crearUsuario(usuario);
+        
+    }
+
+    @DeleteMapping("/usuarios/{id}")
+    public String borrarUsuario(@PathVariable int id){
+        return accionesUsuario.borrarUsuario(id);
+
+    }
+
+    //@PutMapping()
+
+}
