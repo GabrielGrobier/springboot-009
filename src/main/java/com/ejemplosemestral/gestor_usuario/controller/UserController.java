@@ -2,6 +2,8 @@ package com.ejemplosemestral.gestor_usuario.controller;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,6 +16,9 @@ import com.ejemplosemestral.gestor_usuario.service.UserService;
 
 @RestController
 public class UserController {
+
+    @Autowired
+    private UserService userservice1;
 
     UserService accionesUsuario = new UserService();
 
@@ -30,9 +35,9 @@ public class UserController {
     }
 
     @PostMapping("/usuarios")
-    public String crearUsuario(@RequestBody Usuario usuario){
-        return accionesUsuario.crearUsuario(usuario);
-        
+    public ResponseEntity<String> crearUsuario(@RequestBody Usuario usuario){
+        return ResponseEntity.ok(userservice1.crearUsuario(usuario));
+
     }
 
     @DeleteMapping("/usuarios/{id}")
