@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ejemplosemestral.gestor_usuario.model.Usuario;
+import com.ejemplosemestral.gestor_usuario.model.dto.UsuarioDto;
 import com.ejemplosemestral.gestor_usuario.service.UserService;
 
 @RestController
@@ -28,9 +29,12 @@ public class UserController {
         
     }
 
-    @GetMapping("/usuarios/{id}")
-    public Usuario obtenerUsuario(@PathVariable int id){
-        return accionesUsuario.obtenerUsuario(id);
+    @GetMapping("/usuarios/{correo}")
+    public ResponseEntity<UsuarioDto> obtenerUsuario(@PathVariable String correo){
+        if (userservice1.obtenerUsuario(correo) != null){
+            return  ResponseEntity.ok(userservice1.obtenerUsuarioDto(correo));
+        }
+        return ResponseEntity.notFound().build();
 
     }
 

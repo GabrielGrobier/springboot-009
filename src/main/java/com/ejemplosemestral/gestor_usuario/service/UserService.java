@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ejemplosemestral.gestor_usuario.model.Usuario;
+import com.ejemplosemestral.gestor_usuario.model.dto.UsuarioDto;
 import com.ejemplosemestral.gestor_usuario.model.entity.UsuarioEntity;
 import com.ejemplosemestral.gestor_usuario.repository.UsuarioRepository;
 
@@ -26,12 +27,26 @@ public class UserService {
         return usuarios;
    } 
 
+   public Usuario obtenerUsuario (String correo){
+        boolean estado = usuarioRepository.existsByCorreo(correo);
+        if(estado){
+            UsuarioEntity nuevoUsuario = usuarioRepository.findByCorreo(correo);
+            Usuario usuarioResponse = new Usuario(nuevoUsuario.getId(), nuevoUsuario.getNombre(), nuevoUsuario.getCorreo(), nuevoUsuario.getPassword());
+            return usuarioResponse;
 
-   public Usuario obtenerUsuario(int id){
-        for(Usuario user : usuarios){
-            if(user.getId() == id){
-                return user;
-            }
+        }
+        return null;
+
+
+   }
+
+   public UsuarioDto obtenerUsuarioDto(String correo){
+        boolean estado = usuarioRepository.existsByCorreo(correo);
+        if (estado){
+            UsuarioEntity nuevoUsuario = usuarioRepository.findByCorreo(correo);
+            UsuarioDto nuevoUsuarioDto = new UsuarioDto(nuevoUsuario.getNombre(),nuevoUsuario.getCorreo());
+            return nuevoUsuarioDto;
+
         }
         return null;
 
