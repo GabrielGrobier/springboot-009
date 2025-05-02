@@ -89,4 +89,23 @@ public class UserService {
     return null;
    }
 
+   public UsuarioDto obtenerUsuarioDtoid(int id){
+    try{
+        if (usuarioRepository.findUsuarioById(id)!= null ){
+            UsuarioEntity nuevoUsuario = usuarioRepository.findUsuarioById(id);
+            UsuarioDto responseUsuario = new UsuarioDto(
+                nuevoUsuario.getNombre(),
+                nuevoUsuario.getCorreo()
+            );
+            return responseUsuario;
+        }
+        return null;
+    }
+    catch(Exception e){
+        return null;
+    }
+
+
+
+}
 }

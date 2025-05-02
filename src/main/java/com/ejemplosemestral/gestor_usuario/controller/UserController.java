@@ -51,5 +51,16 @@ public class UserController {
     }
 
     //@PutMapping()
+    @GetMapping("/obtenerUsuarioDto/{id}")
+    public ResponseEntity<UsuarioDto> obtenerUsuarioDTOID(@PathVariable int id){
+        if (userservice1.obtenerUsuarioDtoid(id)!= null){
+            return ResponseEntity.ok(userservice1.obtenerUsuarioDtoid(id));
+
+        }
+        return ResponseEntity.notFound().build();
+
+        
+
+    }
 
 }
