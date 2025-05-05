@@ -15,6 +15,8 @@ import com.ejemplosemestral.gestor_usuario.model.Usuario;
 import com.ejemplosemestral.gestor_usuario.model.dto.UsuarioDto;
 import com.ejemplosemestral.gestor_usuario.service.UserService;
 
+import io.swagger.v3.oas.annotations.Operation;
+
 @RestController
 public class UserController {
 
@@ -22,7 +24,7 @@ public class UserController {
     private UserService userservice1;
 
     UserService accionesUsuario = new UserService();
-
+    @Operation(summary = "Este endpoint trae todo los usuarios ")
     @GetMapping("/usuarios")
     public List<Usuario> mostrarUsuarios(){
         return accionesUsuario.getAllUser();
